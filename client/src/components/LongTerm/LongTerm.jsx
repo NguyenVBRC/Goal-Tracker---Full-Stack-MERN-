@@ -1,8 +1,8 @@
 import React, {useState, useRef} from 'react';
-import "./longTerm.css"
+import "./longTerm.css";
 
 export default function LongTerm() {
-    const [ goals, setGoals ] = useState(["Get Engineering Job", "Graduate with CS degree"]);
+    const [ goals, setGoals ] = useState([]);
     const goalEntry = useRef();
 // Container Open = False, Container Collapsed = True
     const [ containerHeight, setContainerHeight] = useState(false);
@@ -12,6 +12,7 @@ export default function LongTerm() {
       setContainerHeight(prevContainerHeight => !prevContainerHeight);
     }
 
+    // On Button Click, update state with goals and clear input
     function handleSubmit(){
       setGoals([...goals, goalEntry.current.value]);
       goalEntry.current.value = null;
