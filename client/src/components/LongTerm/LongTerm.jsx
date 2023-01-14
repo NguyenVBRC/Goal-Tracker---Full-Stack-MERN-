@@ -1,5 +1,4 @@
 import React, {useState, useRef} from 'react';
-import BoilerLongTerm from './BoilerLongTerm';
 import "./longTerm.css"
 
 export default function LongTerm() {
@@ -13,14 +12,13 @@ export default function LongTerm() {
       setContainerHeight(prevContainerHeight => !prevContainerHeight);
     }
 
-
     function handleSubmit(){
-      setGoals([...goals, goalEntry.current.value])
+      setGoals([...goals, goalEntry.current.value]);
+      goalEntry.current.value = null;
     }
 
   return (
-    <section 
-      // className='long__container' 
+    <section
       style={{height: styleHeight}}
     >
       <h3 onClick={toggleHeight}>Long Term Goals</h3>
