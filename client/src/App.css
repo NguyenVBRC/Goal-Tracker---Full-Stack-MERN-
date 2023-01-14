@@ -56,6 +56,11 @@ h3:hover {
   padding: 1rem;
 }
 
+#checklist__goals {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 .checklist p {
   text-align: center;
 }
