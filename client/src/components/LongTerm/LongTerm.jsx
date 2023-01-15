@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import axios from "axios";
 import "./longTerm.css";
 
 export default function LongTerm() {
@@ -33,10 +34,7 @@ export default function LongTerm() {
       localStorage.clear()
     }
 
-    // Loads saved goals to state on initial render only
-    useEffect(()=>{
-      fetch("/")
-    }, [])
+    // Create useEffect that contains an axios get request
 
   return (
     <section style={{height: styleHeight}}>
