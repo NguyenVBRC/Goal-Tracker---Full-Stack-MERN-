@@ -12,5 +12,5 @@ app.listen(port, ()=>{
 })
 
 app.get("/", (req, res)=>{
-    res.send(Object.values(localStorage));
+    res.send();
 })
