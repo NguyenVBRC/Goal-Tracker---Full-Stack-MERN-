@@ -1,16 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react';
-import axios from "axios";
+// import axios from "axios";
 import "./longTerm.css";
 
 export default function LongTerm() {
-    // Goals are rendered and mapped over. 
-    // The Reference is to the input on the right
     const [ goals, setGoals ] = useState([]);
-    const goalEntry = useRef();
-    // Container Open = False, Container Collapsed = True
+    const [ goalsObject, setGoalsObject ] = useState({});
+    const goalEntry = useRef(); // Text Input
     const [ containerHeight, setContainerHeight] = useState(false);
+    const mappedGoals = goals.map((givenGoals)=> {
+      <p key={givenGoals}>{givenGoals}</p>
+    }
+    );
     let styleHeight = containerHeight ? "50px" : "300px";
     let toggleDisplay = containerHeight ? "0" : "1";
+
     function toggleHeight(){
       setContainerHeight(prevContainerHeight => !prevContainerHeight);
     }
@@ -35,6 +38,23 @@ export default function LongTerm() {
     }
 
     // Create useEffect that contains an axios get request
+    async function getRequest(url){
+      const response = await fetch(url);
+      const data = await response.json();
+      // console.log(data)
+      return data
+    }
+
+    useEffect(()=>{
+      getRequest("http://localhost:4000/")
+      .then(data => {
+        setGoalsObject({data});
+
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      })
+    }, [])
 
   return (
     <section style={{height: styleHeight}}>
@@ -43,9 +63,7 @@ export default function LongTerm() {
         {/* Maps over goals state and renders to page */}
         <div className='checklist' >
           <div id='checklist__goals'>
-            {goals.map((goals)=>{
-              return <p key={goals}>{goals}</p>
-            })}
+            {mappedGoals}
           </div>
           <button onClick={clearGoals} id="goal__button">Clear</button>
         </div>
