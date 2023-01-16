@@ -4,12 +4,15 @@ import "./longTerm.css";
 
 export default function LongTerm() {
     const [ goals, setGoals ] = useState([]);
-    const [ goalsObject, setGoalsObject ] = useState({});
     const goalEntry = useRef(); // Text Input
     const [ containerHeight, setContainerHeight] = useState(false);
+
     const mappedGoals = goals.map((givenGoals)=> {
-      <p key={givenGoals}>{givenGoals}</p>
+      return (
+        <p key={givenGoals}>{givenGoals}</p>
+      )
     }
+
     );
     let styleHeight = containerHeight ? "50px" : "300px";
     let toggleDisplay = containerHeight ? "0" : "1";
@@ -31,25 +34,26 @@ export default function LongTerm() {
       }
     }
 
-    // Clear Goals from localStorage
+    // Clear Goals from localStorage. 
+    // Will be changed to delete request
     function clearGoals(){
       setGoals([]);
       localStorage.clear()
     }
 
-    // Create useEffect that contains an axios get request
+    // async get request
     async function getRequest(url){
       const response = await fetch(url);
       const data = await response.json();
-      // console.log(data)
       return data
     }
 
     useEffect(()=>{
       getRequest("http://localhost:4000/")
       .then(data => {
-        setGoalsObject({data});
-
+        setGoals(Object.values(data));
+        console.log(data)
+        console.log(goals)
       })
       .catch(error => {
         console.error("Error:", error);
