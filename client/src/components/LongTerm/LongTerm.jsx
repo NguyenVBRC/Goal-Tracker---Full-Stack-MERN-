@@ -9,7 +9,7 @@ export default function LongTerm() {
 
     const mappedGoals = goals.map((givenGoals)=> {
       return (
-        <p key={givenGoals}>{givenGoals}</p>
+        <p key={givenGoals.title}>{givenGoals.title}</p>
       )
     }
 
@@ -22,23 +22,33 @@ export default function LongTerm() {
     }
 
     // On Button Click, update state with goals, saves state to localStorage, and clears input
-    function handleSubmit(){
+    async function handleSubmit(){
       if (goals.includes(goalEntry.current.value)){
         console.log("Goal already exists.")
-      } else {
-        setGoals([...goals, goalEntry.current.value]);
-        // Replace first paramenter of setItem to uuid?
-        localStorage.setItem(goalEntry.current.value, goalEntry.current.value);
-        console.log(Object.entries(localStorage));
-        goalEntry.current.value = null;
+        return 
       }
+
+      async function createGoal(goal){
+        const response = await fetch("http://localhost:4000/Goals",{
+          body: JSON.stringify(goal),
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          mode: "cors",
+        });
+        return response.json();
+      }
+      const item = await createGoal({type: "longTerm", title: goalEntry.current.value});
+      setGoals([...goals, item]);
+      goalEntry.current.value = null;
+      console.log(item)
     }
 
     // Clear Goals from localStorage. 
     // Will be changed to delete request
     function clearGoals(){
       setGoals([]);
-      localStorage.clear()
     }
 
     // async get request
@@ -49,15 +59,14 @@ export default function LongTerm() {
     }
 
     useEffect(()=>{
-      getRequest("http://localhost:4000/")
-      .then(data => {
-        setGoals(Object.values(data));
-        console.log(data)
-        console.log(goals)
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      })
+      getRequest("http://localhost:4000/Goals")
+        .then(data => {
+          setGoals(data);
+          console.log(`Fetch Data:`, data)
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        })
     }, [])
 
   return (
