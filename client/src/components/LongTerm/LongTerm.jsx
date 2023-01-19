@@ -45,8 +45,7 @@ export default function LongTerm() {
       console.log(item)
     }
 
-    // Clear Goals from localStorage. 
-    // Will be changed to delete request
+    // Change into a delete request.
     function clearGoals(){
       setGoals([]);
     }
