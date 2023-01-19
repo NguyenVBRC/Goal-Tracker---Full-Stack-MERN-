@@ -53,7 +53,8 @@ export default function LongTerm() {
         method: "DELETE"
       })
       .then(setGoals([]))
-
+    }
+    
     // Change into a delete request.
     function clearGoals(){
       setGoals([]);
