@@ -47,18 +47,16 @@ export default function LongTerm() {
       console.log(item)
     }
 
-<<<<<<< HEAD
     // DELETE Request. Clears DB and State. 
     async function clearGoals(){
       await fetch("http://localhost:4000/Goals",{
         method: "DELETE"
       })
       .then(setGoals([]))
-=======
+
     // Change into a delete request.
     function clearGoals(){
       setGoals([]);
->>>>>>> 44772e613bed7f94f15dad3983f9113c324f83aa
     }
 
     // Initializing the GET request
