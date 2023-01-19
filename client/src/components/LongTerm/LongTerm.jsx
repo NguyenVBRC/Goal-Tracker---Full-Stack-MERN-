@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react';
-// import axios from "axios";
 import "./longTerm.css";
 
 export default function LongTerm() {
@@ -7,6 +6,7 @@ export default function LongTerm() {
     const goalEntry = useRef(); // Text Input
     const [ containerHeight, setContainerHeight] = useState(false);
 
+    // Maps over the given input text
     const mappedGoals = goals.map((givenGoals)=> {
       return (
         <p key={givenGoals.title}>{givenGoals.title}</p>
@@ -14,14 +14,16 @@ export default function LongTerm() {
     }
 
     );
+    //On Click, Changes Height
     let styleHeight = containerHeight ? "50px" : "300px";
+    //On Click, Changes Opacity
     let toggleDisplay = containerHeight ? "0" : "1";
-
+    // Technically toggles height and opacity
     function toggleHeight(){
       setContainerHeight(prevContainerHeight => !prevContainerHeight);
     }
 
-    // On Button Click, update state with goals, saves state to localStorage, and clears input
+    // On Click, update state with goals, sends a POST request to save the goals to the DB, and clears input text
     async function handleSubmit(){
       if (goals.includes(goalEntry.current.value)){
         console.log("Goal already exists.")
@@ -45,19 +47,22 @@ export default function LongTerm() {
       console.log(item)
     }
 
-    // Clear Goals from localStorage. 
-    // Will be changed to delete request
-    function clearGoals(){
-      setGoals([]);
+    // DELETE Request. Clears DB and State. 
+    async function clearGoals(){
+      await fetch("http://localhost:4000/Goals",{
+        method: "DELETE"
+      })
+      .then(setGoals([]))
     }
 
-    // async get request
+    // Initializing the GET request
     async function getRequest(url){
       const response = await fetch(url);
       const data = await response.json();
       return data
     }
 
+    // On Page loads, sends a GET request to the DB to get the saved goals.
     useEffect(()=>{
       getRequest("http://localhost:4000/Goals")
         .then(data => {
