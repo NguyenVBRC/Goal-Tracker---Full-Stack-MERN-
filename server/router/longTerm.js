@@ -22,5 +22,14 @@ router.get("/Goals", async (request, response) => {
         return response.status(500).json(error);
     }
 });
+
+router.delete("/Goals", async (request, response) => {
+    try {
+        await Goals.deleteMany();
+    } catch(error) {
+        console.log(error);
+        return response.status(500).json(error);
+    }
+});
   
 module.exports = router;
