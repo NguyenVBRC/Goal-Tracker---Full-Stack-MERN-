@@ -76,7 +76,7 @@ export default function Goals() {
         {/* Goals and Clear Button */}
         <main>
           <div className='goals__container'>{mappedGoals}</div>
-          <button onClick={clear} id='btn'>Clear</button>
+          <button onClick={clear} className="btn "id='clear__btn'>Clear</button>
         </main>
 
         {/* Input and Enter Button */}
@@ -90,7 +90,7 @@ export default function Goals() {
               onKeyDown={e => {if (e.key === "Enter") handleSubmit(e)}}
               id='input__text'
             />
-            <button onClick={handleSubmit} id='btn'>Enter</button>
+            <button onClick={handleSubmit} className='btn' id='enter__btn'>Enter</button>
           </div>
         </div>
 

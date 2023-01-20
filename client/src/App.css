@@ -24,7 +24,7 @@ main {
   border: solid 1px black;
   border-radius: 5px;
   width: 350px;
-  background: lightslategray;
+  background: rgb(77, 203, 77);
 }
 
 .goals__container {
@@ -36,7 +36,7 @@ main {
   width: 90%;
   margin: 1rem;
   padding: 1rem;
-  background-color: rgb(229, 229, 229);
+  background-color: rgb(214, 238, 251);
   overflow-y: scroll;
 }
 
@@ -44,9 +44,23 @@ main {
   display: none;
 }
 
-#btn {
+.btn {
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
+  border: 1px solid black;
+  
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+#clear__btn:active {
+  background-color: rgb(240, 178, 64);
+}
+
+#enter__btn:active {
+  background-color: rgb(77, 203, 77);
 }
 
 /* Input Container / Controls */
@@ -55,7 +69,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: lightslategray;
+  background-color: rgb(240, 178, 64);
   border: solid 1px black;
   border-radius: 5px;
   width: 350px;
@@ -72,7 +86,7 @@ main {
 #input__text {
   padding: 0.25rem;
   border-radius: 3px;
-  border: 0px;
+  border: 1px solid black;
 }
 
 #input__text:focus-visible {
