@@ -1,4 +1,5 @@
-# Full Stack Application Using the MERN Tech Stack (MongoDb, Express, React, Node)
+# Full Stack Application Using the MERN Tech Stack  
+(MongoDb, Express, React, Node)
 
 ## How to use
 1. Clone the project by using "git clone https://github.com/NguyenVBRC/MERN-CheckList.git"  
