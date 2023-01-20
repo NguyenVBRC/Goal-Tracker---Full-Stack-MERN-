@@ -2,21 +2,16 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const longTerm = require("./router/longTerm.js")
+const goals = require("./router/goals.js")
 const port = 4000;
 
 require("dotenv").config();
 DB_KEY = process.env.MONGO_KEY;
 const uri = `mongodb+srv://Test123:${DB_KEY}@cluster0.ujggnnh.mongodb.net/?retryWrites=true&w=majority`
 
-
 app.use(cors());
 app.use(express.json());
-app.use(longTerm);
-
-// app.get("/", (req, res)=>{
-//     res.send(fakeDb);
-// })
+app.use(goals);
 
 async function connect() {
     try {

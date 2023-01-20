@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const Goals = require("../model/LongTerm")
+const Goals = require("../model/GoalsModel")
 const router = Router();
 
 router.post("/Goals", async (request, response) => {
